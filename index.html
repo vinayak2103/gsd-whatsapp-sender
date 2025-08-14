@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSD Sauda Message Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 700px;
+            margin-top: 50px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-bottom: 30px;
+            color: #007bff;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>GSD Sauda Message</h2>
+    <form id="whatsappForm">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Date:</label>
+                <input type="date" class="form-control" id="date" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Item:</label>
+                <input type="text" class="form-control" id="item" placeholder="Enter item" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Weight:</label>
+                <input type="text" class="form-control" id="weight" placeholder="Enter weight" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Rate:</label>
+                <input type="text" class="form-control" id="rate" placeholder="Enter rate" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Location:</label>
+                <input type="text" class="form-control" id="location" placeholder="Enter location" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Seller:</label>
+                <input type="text" class="form-control" id="seller" placeholder="Enter seller" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Buyer:</label>
+                <input type="text" class="form-control" id="buyer" placeholder="Enter buyer" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Broker Name (Optional):</label>
+                <select class="form-control" id="brokerName">
+                    <option value="">Select Broker Name</option>
+                    <option>दीपचंद ज्ञानचंद गंगराडे (दलाल)</option>
+                    <option>माणकचंद ज्ञानचंद गंगराडे (दलाल)</option>
+                    <option>सतीशचंद ज्ञानचंद गंगराडे (दलाल)</option>
+                    <option>प्रवीणचंद ज्ञानचंद गंगराड़े (दलाल)</option>
+                    <option>राजेश दीपचंद गंगराडे (दलाल)</option>
+                    <option>विनोद दीपचंद गंगराड़े (दलाल)</option>
+                    <option>आशुतोष सतीशचंद गंगराड़े (दलाल)</option>
+                    <option>राज सतीशचंद गंगराड़े (दलाल)</option>
+                    <option>गोविंदा हेमचंद गंगराड़े (दलाल)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Remark (Optional):</label>
+            <textarea class="form-control" id="remark" rows="4" placeholder="Enter remarks"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+    </form>
+</div>
+
+<script>
+document.getElementById("whatsappForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let date = document.getElementById("date").value;
+    let item = document.getElementById("item").value;
+    let weight = document.getElementById("weight").value;
+    let rate = document.getElementById("rate").value;
+    let location = document.getElementById("location").value;
+    let seller = document.getElementById("seller").value;
+    let buyer = document.getElementById("buyer").value;
+    let brokerName = document.getElementById("brokerName").value;
+    let remark = document.getElementById("remark").value;
+
+    let message = `काकाजी आज रोज तारीख ${date} को ${item} टन ${weight} भाव ${rate} डिलेवरी ${location} में बेचवाल ${seller} ,खरीदार ${buyer} का सौदा नोट करना जी`;
+
+    if (remark) {
+        message += `\n\nनोट: ${remark}`;
+    }
+    if (brokerName) {
+        message += `\n\nदलाल का नाम: ${brokerName}`;
+    }
+
+    let url = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+
+    window.open(url, "_blank");
+});
+</script>
+
+</body>
+</html>
